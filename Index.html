@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <title>Voucher × Shop</title>
+  <!-- Telegram Web App SDK -->
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    body {
+      background-color: #121921;
+      color: #ffffff;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      min-height: 100vh;
+    }
+
+    /* Green Product List Buttons */
+    .btn-green {
+      background-color: #3b873e;
+      color: #ffffff;
+      border: none;
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-size: 14px;
+      font-weight: 600;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 6px;
+      cursor: pointer;
+      width: 100%;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+      transition: background-color 0.15s ease, transform 0.05s ease;
+    }
+
+    .btn-green:active {
+      background-color: #2e6b31;
+      transform: scale(0.99);
+    }
+
+    /* Red Close Button */
+    .btn-red {
+      background-color: #b73a3e;
+      color: #ffffff;
+      border: none;
+      border-radius: 10px;
+      padding: 12px;
+      font-size: 15px;
+      font-weight: bold;
+      text-align: center;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 4px;
+      margin-bottom: 8px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+      transition: background-color 0.15s ease, transform 0.05s ease;
+    }
+
+    .btn-red:active {
+      background-color: #922d30;
+      transform: scale(0.99);
+    }
+
+    /* Blue Navigation Menu Section */
+    .menu-container {
+      margin-top: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding-top: 10px;
+    }
+
+    .menu-row {
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn-blue {
+      background-color: #2185d0;
+      color: #ffffff;
+      border: none;
+      border-radius: 10px;
+      padding: 12px;
+      font-size: 14px;
+      font-weight: bold;
+      flex: 1;
+      text-align: center;
+      cursor: pointer;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+      transition: background-color 0.15s ease, transform 0.05s ease;
+    }
+
+    .btn-blue-full {
+      background-color: #2185d0;
+      color: #ffffff;
+      border: none;
+      border-radius: 10px;
+      padding: 12px;
+      font-size: 14px;
+      font-weight: bold;
+      width: 100%;
+      text-align: center;
+      cursor: pointer;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+      transition: background-color 0.15s ease, transform 0.05s ease;
+    }
+
+    .btn-blue:active, .btn-blue-full:active {
+      background-color: #1665a0;
+      transform: scale(0.99);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Green Voucher List -->
+  <button class="btn-green" onclick="selectItem('PVR ₹200 COUPON (2 SEAT)')">🛍️ PVR ₹200 COUPON (2 SEAT) | ₹42.00 | Avl</button>
+  <button class="btn-green" onclick="selectItem('Swiggy RS.849 Off Gc')">🍔 Swiggy RS.849 Off Gc | ₹349.00 | Avl</button>
+  <button class="btn-green" onclick="selectItem('Dominos ₹799 Gift Card')">🍕 Dominos ₹799 Gift Card | ₹299.00 | Avl</button>
+  <button class="btn-green" onclick="selectItem('Brevistay Rs. 1200 Account')">🏨 Brevistay Rs. 1200 Account | ₹349.00 | Avl</button>
+  <button class="btn-green" onclick="selectItem('Uber Rs. 699 Gift Card')">🚗 Uber Rs. 699 Gift Card | ₹299.00 | Avl</button>
+  <button class="btn-green" onclick="selectItem('ChatGPT 6M Premium')">🤖 ChatGPT 6M Premium | ₹349.00 | Avl</button>
+  <button class="btn-green" onclick="selectItem('Shein 800 Off 1000')">🏷️ Shein 800 Off 1000 | ₹135.00 | Avl</button>
+  <button class="btn-green" onclick="selectItem('Shein Bulk 800 Off')">🏷️ Shein Bulk 800 Off | ₹80.00 | Avl</button>
+  <button class="btn-green" onclick="selectItem('Pvr Movie ₹850 Gift Card')">🎥 Pvr Movie ₹850 Gift Card | ₹299.00 | Avl</button>
+
+  <!-- Red Close Button -->
+  <button class="btn-red" onclick="closeWebApp()">❌ Close</button>
+
+  <!-- Blue Bottom Menu Buttons -->
+  <div class="menu-container">
+    <div class="menu-row">
+      <button class="btn-blue" onclick="selectItem('Buy Voucher')">🛍️ Buy Voucher</button>
+      <button class="btn-blue" onclick="selectItem('History')">📦 History</button>
+    </div>
+    <div class="menu-row">
+      <button class="btn-blue" onclick="selectItem('Support')">💬 Support</button>
+      <button class="btn-blue" onclick="selectItem('Disclaimer')">ℹ️ Disclaimer</button>
+    </div>
+    <button class="btn-blue-full" onclick="selectItem('Join Channel')">📢 Join Channel</button>
+  </div>
+
+  <script>
+    const tg = window.Telegram.WebApp;
+    tg.ready();
+    tg.expand();
+
+    function selectItem(name) {
+      tg.sendData(JSON.stringify({ action: "select", item: name }));
+      tg.close();
+    }
+
+    function closeWebApp() {
+      tg.close();
+    }
+  </script>
+</body>
+</html>
